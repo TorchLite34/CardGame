@@ -1,10 +1,19 @@
+
 import java.util.Random;
+import java.util.Scanner;
 
+/**
+ * A class that fills a hand of 7 cards with random Card Objects and then asks the user to pick a card.
+ * It then searches the array of cards for the match to the user's card. 
+ * To be used as starting code in Exercise
+ *
+ * @author Jordan
+ * @author Jordan Ing, February 1st 2023
+ */
 public class CardTest {
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
+    
+    public static void main(String[] args) {
+        
 		int[][] list = makeDeck();
 		list = shuffle(list);
 		Card deck[] = new Card[7];
@@ -14,9 +23,58 @@ public class CardTest {
 			deck[i] = c;
 			System.out.println(i+1 + ". " + deck[i].toString());
 		}
+		
+		boolean gameon = true;
+		while(gameon == true){
+			int[] temp = getInput();
+			Card tempCard = new Card(temp[1], temp[0]);
+			for(int i = 0; i < deck.length; i++) {
+				if(deck[i].toString().equals(tempCard.toString())) {
+					gameon = false;
+					break;
+				}
+			}
+			if(gameon == true) {
+				System.out.println("No match!!! Please try again!!!");
+			}
+		}
+		printInfo();
 	}
+    
 	
-	public static int[][] makeDeck(){
+
+
+        
+
+        // insert code to ask the user for Card value and suit, create their card
+        // and search the hand here. 
+        // Hint: You can ask for values 1 to 10, and then
+        //       11 for jack, 12 for queen, etc. (remember arrays are 0-based though)
+        //       1 for Hearts, 2 for Diamonds, etc. (remember arrays are 0-based though)
+        // 
+        // Then loop through the cards in the array to see if there's a match.
+        
+        // If the guess is successful, print System.out.println("Congratulations, you guessed right!");.
+        
+    
+
+    /**
+     * A simple method to print out personal information. Follow the instructions to 
+     * replace this information with your own.
+     * @author Paul Bonenfant Jan 2022
+     */
+    public static int[] getInput(){
+		Scanner key = new Scanner(System.in);
+		int temp[] = new int[2];
+		System.out.print("\n--------Pick a card and see if it matches!--------\n"
+				+ "\nEnter a card integer value (1-13 ace to king): ");
+		temp[0] = key.nextInt();
+		System.out.print("\nEnter a card integer value (1-4; hearts, clubs, spades, diamonds): ");
+		temp[1] = key.nextInt();
+		return temp;
+    }
+    
+	public static int[][] makeDeck(){ //makes it so that there are no duplicates
 		int[][] cards = new int[52][2];
 
 		int s = 1, y = 0;
@@ -34,7 +92,7 @@ public class CardTest {
 		return cards;
 	}
 	
-	public static int[][] shuffle(int[][] cards) {
+	public static int[][] shuffle(int[][] cards) { //shuffles the list of cards so that i have a random list with no duplicates
 		Random rand = new Random();
 		int[][] temp = new int[1][2];
 			for(int i = 0; i < 52; i++) {
@@ -56,4 +114,30 @@ public class CardTest {
 			}
 			return cards;
 		}
+	
+    private static void printInfo() {
+    
+        System.out.println("\n-------------Congratulations, you guessed right!-------------");
+        System.out.println();
+        
+        System.out.println("My name is Jordan, but you can call me Nadroj, Jord or prime minister");
+        System.out.println();
+        
+        System.out.println("My career ambitions: Destroy the world");
+        System.out.println("Dont Be more active on LinkedIn");
+        System.out.println("I will Have a semester with no violations of academic integrity cuz im so good that id never need to cheat");
+	System.out.println();	
+
+        System.out.println("My hobbies:");
+        System.out.println("Making dumb programs");
+        System.out.println("Gamer");
+        System.out.println("Weeb");
+        System.out.println("spending time with my soon to be wife");
+
+        System.out.println();
+        
+    
+    }
+
 }
+
